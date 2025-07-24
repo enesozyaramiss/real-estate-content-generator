@@ -1,4 +1,4 @@
-# 🏡 Real Estate Content Generator
+#  Real Estate Content Generator
 
 AI-powered content generator for real estate property listings using Google Gemini 1.5 Flash API. Generates SEO-optimized, multilingual HTML content for property listing pages.
 
@@ -6,16 +6,16 @@ AI-powered content generator for real estate property listings using Google Gemi
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-green.svg)](https://fastapi.tiangolo.com/)
 [![Gemini](https://img.shields.io/badge/Google-Gemini_1.5_Flash-orange.svg)](https://ai.google.dev/)
 
-## 🌟 Features
+##  Features
 
-- **🤖 AI-Powered Content** - Uses Google Gemini 1.5 Flash (100% FREE)
-- **🌍 Multilingual** - English & Portuguese with proper localization
-- **📊 SEO Optimized** - Keyword-rich, search engine ready content
-- **⚡ Fast & Async** - Non-blocking API architecture
-- **🏷️ Structured Output** - 7 HTML sections ready for web integration
-- **📋 Auto Documentation** - Interactive Swagger UI
+- ** AI-Powered Content** - Uses Google Gemini 1.5 Flash (100% FREE)
+- ** Multilingual** - English & Portuguese with proper localization
+- ** SEO Optimized** - Keyword-rich, search engine ready content
+- ** Fast & Async** - Non-blocking API architecture
+- ** Structured Output** - 7 HTML sections ready for web integration
+- ** Auto Documentation** - Interactive Swagger UI
 
-## 📋 Generated Content Sections
+## Generated Content Sections
 
 | Section | HTML Tag | Purpose | Limit |
 |---------|----------|---------|-------|
@@ -27,7 +27,7 @@ AI-powered content generator for real estate property listings using Google Gemi
 | Neighborhood Info | `<section id="neighborhood">` | Area description | 150-300 chars |
 | Call to Action | `<p class="call-to-action">` | Conversion message | 100 chars |
 
-## 🚀 Installation & Setup
+##  Installation & Setup
 
 ### Prerequisites
 - Python 3.8+
@@ -78,7 +78,7 @@ uvicorn main:app --reload --port 8000
 # API Docs: http://localhost:8000/docs
 ```
 
-## 📖 API Usage
+## API Usage
 
 ### Health Check
 
@@ -160,7 +160,7 @@ curl -X POST "http://localhost:8000/generate-section?section_name=title" \
 
 Available sections: `title`, `meta_description`, `headline`, `description`, `key_features`, `neighborhood`, `call_to_action`
 
-## 🌍 Multilingual Support
+## Multilingual Support
 
 ### Supported Languages
 
@@ -188,7 +188,22 @@ Available sections: `title`, `meta_description`, `headline`, `description`, `key
 }
 ```
 
-## 🏗️ Project Structure
+## System Architecture
+
+### How It Works
+
+```
+JSON Property Data → FastAPI → AI Prompts → Gemini API → HTML Content → User
+```
+
+**Flow Breakdown:**
+1. **Input:** User sends property data in JSON format
+2. **Validation:** FastAPI + Pydantic validates the data structure
+3. **Processing:** System builds context and selects language-specific prompts
+4. **AI Generation:** 7 separate calls to Gemini API (one per HTML section)
+5. **Output:** Returns structured JSON with HTML-tagged content sections
+
+### Project Structure
 
 ```
 real-estate-content-generator/
@@ -211,7 +226,7 @@ real-estate-content-generator/
         └── sample_pt.json       # Test data (Portuguese)
 ```
 
-## 🔧 Technical Details
+## Technical Details
 
 ### Architecture
 
@@ -219,23 +234,6 @@ real-estate-content-generator/
 - **Pydantic** - Data validation and serialization
 - **Google Gemini 1.5 Flash** - Free AI model for content generation
 - **Async/Await** - Non-blocking architecture for better performance
-
-### API Rate Limits (Free Tier)
-
-- **Daily:** 1,500 requests
-- **Per Minute:** 15 requests  
-- **Output Tokens:** 8,192 per request
-
-**Current Usage:** 7 API calls per property (one per section)
-
-### Error Handling
-
-The system includes robust error handling:
-
-- **Input Validation** - Pydantic automatically validates JSON input
-- **API Failures** - Graceful degradation with fallback content
-- **Rate Limiting** - Proper HTTP error responses
-- **Logging** - Comprehensive logging for debugging
 
 ```json
 // Example error response
@@ -246,69 +244,48 @@ The system includes robust error handling:
 }
 ```
 
-## 🧪 Testing
+## Testing
 
-### Run Tests
-
-```bash
-# Install test dependencies (included in requirements.txt)
-pytest
-
-# Run with verbose output
-pytest -v
-
-# Test specific functionality
-pytest tests/test_api.py
-```
-
-### Manual Testing
+Test the API with sample data:
 
 ```bash
-# Test English content
-curl -X POST http://localhost:8000/generate-content \
+# Test English content generation
+curl -X POST "http://localhost:8000/generate-content" \
      -H "Content-Type: application/json" \
      -d @tests/sample_data/sample_en.json
 
-# Test Portuguese content  
-curl -X POST http://localhost:8000/generate-content \
+# Test Portuguese content generation
+curl -X POST "http://localhost:8000/generate-content" \
      -H "Content-Type: application/json" \
      -d @tests/sample_data/sample_pt.json
+
+# Test single section generation
+curl -X POST "http://localhost:8000/generate-section?section_name=title" \
+     -H "Content-Type: application/json" \
+     -d @tests/sample_data/sample_en.json
+
+# Health check
+curl http://localhost:8000/health
 ```
 
-## 🎯 SEO Guidelines
+## SEO Guidelines
 
 ### What the System Does
 
-✅ **Includes key searchable phrases:**
+ **Includes key searchable phrases:**
 - "apartment for sale in Lisbon" 
 - "T3 apartment in Campo de Ourique"
 - "real estate in Portugal"
 
-✅ **Optimizes content structure:**
+ **Optimizes content structure:**
 - Proper HTML tags for each section
 - Character limits for SEO best practices
 - Natural keyword integration
 
-✅ **Multilingual SEO:**
+ **Multilingual SEO:**
 - Language-specific keywords
 - Local search optimization
 - Cultural adaptation
-
-## 🚀 Production Considerations
-
-### Environment Variables for Production
-
-```env
-DEBUG=False
-GEMINI_API_KEY=your_production_key
-CORS_ORIGINS=https://yourwebsite.com
-```
-
-### Performance
-
-- **Response Time:** ~5-10 seconds per property (7 sections)
-- **Concurrent Users:** Supports multiple simultaneous requests
-- **Scalability:** Can be extended with caching and batch processing
 
 ### Monitoring
 
@@ -318,33 +295,6 @@ Use the health endpoint for monitoring:
 curl http://your-domain.com/health
 ```
 
-## 🔮 Future Enhancements
-
-- **Batch Processing** - Generate multiple properties at once
-- **Caching Layer** - Redis cache for improved performance  
-- **Additional Languages** - Spanish, French, Italian
-- **Tone Customization** - Professional, friendly, luxury styles
-- **Web Interface** - Browser-based testing and management
-
-## 📞 Support
-
-### Common Issues
-
-**API Key Issues:**
-```bash
-# Check if API key is configured
-curl http://localhost:8000/health
-# Look for "gemini_configured": true
-```
-
-**Rate Limit Exceeded:**
-- Wait 1 minute for rate limit reset
-- Current limits: 15 requests/minute, 1500/day
-
-**Validation Errors:**
-- Ensure all required fields are present
-- Check data types (price must be integer, language must be "en" or "pt")
-
----
-
 **Built with Google Gemini 1.5 Flash, FastAPI, and modern Python for the AI Engineer Technical Challenge.**
+
+Enes Ozyaramis.

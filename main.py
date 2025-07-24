@@ -39,9 +39,9 @@ async def startup_event():
     logger.info(f"Starting {settings.app_name} v{settings.app_version}")
     try:
         await content_generator.initialize()
-        logger.info("✅ Content generator initialized successfully")
+        logger.info(" Content generator initialized successfully")
     except Exception as e:
-        logger.error(f"❌ Failed to initialize content generator: {e}")
+        logger.error(f" Failed to initialize content generator: {e}")
 
 @app.get("/")
 async def root():

@@ -24,7 +24,7 @@ class ContentGenerator:
         try:
             genai.configure(api_key=settings.gemini_api_key)
             
-            # Gemini Flash configuration for better performance
+            # Gemini Flash configuration
             generation_config = genai.types.GenerationConfig(
                 temperature=settings.gemini_temperature,
                 max_output_tokens=settings.gemini_max_output_tokens,
@@ -171,9 +171,9 @@ IMPORTANT: Generate ONLY the requested HTML tag with content, no additional text
                     tag=section_name,
                     content=content
                 ))
-                logger.info(f"✅ Generated {section_name}")
+                logger.info(f" Generated {section_name}")
             except Exception as e:
-                logger.error(f"❌ Failed to generate {section_name}: {e}")
+                logger.error(f" Failed to generate {section_name}: {e}")
                 # Add fallback content
                 sections.append(ContentSection(
                     tag=section_name,
