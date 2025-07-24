@@ -143,7 +143,7 @@ curl -X POST "http://localhost:8000/generate-content" \
         "tag": "headline",
         "content": "<h1>Modern T3 Apartment with Balcony in Campo de Ourique, Lisbon</h1>"
       }
-      // ... 4 more sections
+      
     ]
   },
   "message": "Content generated successfully"
