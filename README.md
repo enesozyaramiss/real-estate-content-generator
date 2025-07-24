@@ -8,7 +8,7 @@ AI-powered content generator for real estate property listings using Google Gemi
 
 ##  Features
 
-- ** AI-Powered Content** - Uses Google Gemini 1.5 Flash (100% FREE)
+- ** AI-Powered Content** - Uses Google Gemini 1.5 Flash 
 - ** Multilingual** - English & Portuguese with proper localization
 - ** SEO Optimized** - Keyword-rich, search engine ready content
 - ** Fast & Async** - Non-blocking API architecture
